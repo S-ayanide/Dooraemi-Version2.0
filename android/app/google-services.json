@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "304277548726",
+    "firebase_url": "https://dooraemi-35dd1.firebaseio.com",
+    "project_id": "dooraemi-35dd1",
+    "storage_bucket": "dooraemi-35dd1.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:304277548726:android:87a06d43b7f3a2815b4017",
+        "android_client_info": {
+          "package_name": "com.example.dooraeminew"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "304277548726-7kkepc2sp4ft47cjrtjo48mgu634gl66.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCF1JfedZ7uYw6U-L6Lm-9w1f2sc-MIDoU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "304277548726-7kkepc2sp4ft47cjrtjo48mgu634gl66.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
