@@ -7,7 +7,7 @@ import '../../Models/DashboardList.dart';
 import '../../Models/Dnd.dart';
 import './BottomDesign.dart';
 import '../Recent.dart';
-import 'package:firebase_database/firebase_database.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -17,6 +17,10 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin {
 
   final ScrollController _mycontroller = new ScrollController();
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+
+  FirebaseUser user;
+  bool isSignedIn = false;
   int selectedPage=0;  
   var dndToggleValue;
   TabController controller;
@@ -24,6 +28,8 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
   @override
   void initState(){
     super.initState();
+    this.checkAuthentication();
+    this.getUser();
     dndToggleValue = false;
     controller = new TabController(vsync: this, length: 3);
   }
@@ -33,6 +39,33 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
     // Dispose of the Tab Controller
     controller.dispose();
     super.dispose();
+  }
+
+  checkAuthentication() async {
+    _auth.onAuthStateChanged.listen((user) {
+      if (user == null) {
+        Navigator.pushReplacementNamed(context, "/SignIn");
+      }
+    });
+  }
+
+  getUser() async {
+    FirebaseUser firebaseUser = await _auth.currentUser();
+    //ISSUE:  https://github.com/flutter/flutter/issues/19746
+    await firebaseUser?.reload();
+    firebaseUser = await _auth.currentUser();
+
+    if (firebaseUser != null) {
+      setState(() {
+        this.user = firebaseUser;
+        this.isSignedIn = true;
+      });
+    }
+    //print(this.user);
+  }
+
+  signOut() async {
+    _auth.signOut();
   }
 
   dndToggle(bool e){
@@ -83,7 +116,7 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
               title: Text('History'),
               trailing: Icon(Icons.history),
               onTap: () => Navigator.of(context).pushNamed("/b"),
-              ),
+            ),
             ListTile(
               title: Text('Do Not Disturb'),
               trailing: Switch(
@@ -93,6 +126,11 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
                 inactiveThumbColor: Colors.lightBlueAccent,
                 activeColor: Colors.green,
               ),
+            ),
+            ListTile(
+              title: Text('Sign Out'),
+              trailing: Icon(Icons.power_settings_new),
+              onTap: signOut
             ),
           ],
         ),

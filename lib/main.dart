@@ -3,6 +3,8 @@ import './screen/History.dart';
 import 'package:flutter/material.dart';
 import 'screen/History.dart';
 import 'screen/Recent.dart';
+import './Authentication/SignInPage.dart';
+import './Authentication/SignUpPage.dart';
 
 void main() => runApp(MyApp());
 
@@ -19,7 +21,9 @@ class MyApp extends StatelessWidget {
       home: SplashScreen(),
       routes: <String, WidgetBuilder>{
         "/a": (BuildContext context) => Recent(),
-        "/b": (BuildContext context) => History()
+        "/b": (BuildContext context) => History(),
+        "/SignIn" : (BuildContext context) => SigninPage(),
+        "/SignUp" : (BuildContext context) => SignUpPage()
       },
     );
   }

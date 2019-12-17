@@ -53,7 +53,7 @@ class _SpeechDialogState extends State<SpeechDialog> {
 
   saveAudioInput() async {
     
-    await _databaseReference.child(_uid).set({
+    await _databaseReference.child(_uid).update({
       'AudioInput': resultText
     });
 
