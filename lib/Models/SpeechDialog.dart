@@ -1,213 +1,234 @@
-// import 'package:flutter/material.dart';
-// import 'dart:async';
+import 'package:flutter/material.dart';
+import 'package:speech_recognition/speech_recognition.dart';
+import 'package:firebase_database/firebase_database.dart';
+import 'dart:ui';
 
-// import 'package:speech_to_text/speech_to_text.dart';
-// import 'package:speech_to_text/speech_recognition_result.dart';
+class SpeechDialog extends StatefulWidget {
+  @override
+  _SpeechDialogState createState() => _SpeechDialogState();
+}
 
-// class SpeechDialog extends StatefulWidget {
-//   @override
-//   _SpeechDialogState createState() => _SpeechDialogState();
-// }
+class _SpeechDialogState extends State<SpeechDialog> {
 
-// class _SpeechDialogState extends State<SpeechDialog> {
+  SpeechRecognition _speechRecognition;
+  static String _uid = '1';
 
-//   bool _hasSpeech = false;
-//   String lastWords = "";
-//   String lastStatus = "";
-//   final SpeechToText speech = SpeechToText();
+  DatabaseReference _databaseReference = FirebaseDatabase.instance.reference().child(_uid);
 
-//   @override
-//   void initState() {
-//     super.initState();
-//     initSpeechState();
-//   }
+  String resultText = "";
 
-//   Future<void> initSpeechState() async {
-//     bool hasSpeech = await speech.initialize(onError: (e) => print(e), onStatus: statusListener );
+  String lastStatus = "";
+  bool isAvailable = false;
+  bool isListening = false;
 
-//     if (!mounted) return;
-//     setState(() {
-//       _hasSpeech = hasSpeech;
-//     });
-//   }
+  @override
+  void initState() {
+    super.initState();
+    initSpeechRecognizer();
+  }
 
-//   @override
-//   Widget build(BuildContext context) {
-//     return MaterialApp(
-//       debugShowCheckedModeBanner: false,
-//       home: Scaffold(
-//         body: _hasSpeech
-//             ? Container(
-//                 color: Color(0xFFF5F5DC),
-//                 height: MediaQuery.of(context).size.height,
-//                 width: MediaQuery.of(context).size.width,
-//                 child: Card(
-//                   elevation: 15.0,
-//                   color: Color(0xFFF5F5DC),
-//                   child: Column(
-//                     children: <Widget>[
-//                       SizedBox(
-//                         height: MediaQuery.of(context).size.height / 4,
-//                       ),
-//                       Row(
-//                         children: <Widget>[
-//                           SizedBox(
-//                             width: MediaQuery.of(context).size.width / 5,
-//                           ),
-//                           SizedBox(
-//                             width: 60.0,
-//                             height: 60.0,
-//                             child: FloatingActionButton(
-//                               child: Icon(
-//                                 Icons.cancel,
-//                                 size: 32.0,
-//                               ),
-//                               mini: true,
-//                               backgroundColor: Colors.deepOrange,
-//                               onPressed: cancelListening,
-//                             ),
-//                           ),
-//                           SizedBox(
-//                             width: 10.0,
-//                           ),
-//                           SizedBox(
-//                             width: 100.0,
-//                             height: 100.0,
-//                             child: FloatingActionButton(
-//                               child: Icon(
-//                                 Icons.mic,
-//                                 size: 35.0,
-//                               ),
-//                               onPressed: startListening,
-//                               backgroundColor: Colors.pink,
-//                             ),
-//                           ),
-//                           SizedBox(
-//                             width: 10.0,
-//                           ),
-//                           SizedBox(
-//                             width: 60.0,
-//                             height: 60.0,
-//                             child: FloatingActionButton(
-//                               child: Icon(
-//                                 Icons.stop,
-//                                 size: 32.0,
-//                               ),
-//                               mini: true,
-//                               backgroundColor: Colors.deepPurple,
-//                               onPressed: stopListening,
-//                             ),
-//                           ),
-//                         ],
-//                       ),
-//                       SizedBox(
-//                         height: 30.0,
-//                       ),
-//                       Expanded(
-//                         child: SingleChildScrollView(
-//                           child: Container(
-//                             width: MediaQuery.of(context).size.width / 1.5,
-//                             color: Color(0xFFf7eaa3),
-//                             child: Column(
-//                               children: <Widget>[
-//                                 SizedBox(
-//                                   height: 30.0,
-//                                 ),
-//                                 Center(
-//                                   child: Text('Your Message', style: TextStyle(
-//                                     fontSize: 17.0, 
-//                                     fontWeight: FontWeight.bold
-//                                     ),
-//                                   ),
-//                                 ),
-//                                 SizedBox(
-//                                   height: 30.0,
-//                                 ),
-//                                 Center(
-//                                   child: Padding(
-//                                     padding: EdgeInsets.all(20.0),
-//                                     child: Text(lastWords), 
-//                                   )
-//                                 ),
-//                                 SizedBox(
-//                                   height: 20.0,
-//                                 ),
-//                               ],
-//                             ),
-//                           ),
-//                         )
-//                       ),
-//                       SizedBox(
-//                         height: 20.0,
-//                       ),
-//                       RaisedButton(
-//                         color: Colors.deepPurple,
-//                         child: Text('Send', style: TextStyle(
-//                           fontSize: 16.0,
-//                           fontWeight: FontWeight.bold,
-//                           color: Colors.white
-//                         )),
-//                         onPressed: (){},
-//                       ),
-//                       SizedBox(
-//                         height: 20.0,
-//                       ),
-//                       Expanded(
-//                         child: Center(
-//                           child: speech.isListening ? 
-//                           Text("I'm listening...", style: TextStyle(
-//                               color: Colors.black,
-//                               fontSize: 15.0
-//                             ),
-//                           )
-//                           :
-//                           Text( 'Not listening', style: TextStyle(
-//                               color: Colors.black,
-//                               fontSize: 15.0
-//                             ),
-//                           ),  
-//                         )
-//                       ),
-//                     ],
-//                   ),
-//                 ),
-//               )
-//             : Center( child: Text('Speech recognition unavailable', style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold))),
-//       ),
-//     );
-//   }
+  void initSpeechRecognizer() {
+    _speechRecognition = SpeechRecognition();
 
-//   void startListening() {
-//     lastWords = "";
-//     speech.listen(onResult: resultListener );
-//     setState(() {
-      
-//     });
-//   }
+    _speechRecognition.setAvailabilityHandler(
+      (bool result) => setState(() => isAvailable = true),
+    );
 
-//   void stopListening() {
-//     speech.stop( );
-//     setState(() {
-      
-//     });
-//   }
+    _speechRecognition.setRecognitionStartedHandler(
+      () => setState(() => isListening = true),
+    );
 
-//   void cancelListening() {
-//     speech.cancel( );
-//     setState(() {
-//       lastWords = "";
-//     });
-//   }
+    _speechRecognition.setRecognitionResultHandler(
+      (String speech) => setState(() => resultText = speech),
+    );
 
-//   void resultListener(SpeechRecognitionResult result) {
-//     setState(() {
-//       lastWords = "${result.recognizedWords}";
-//     });
-//   }
+    _speechRecognition.setRecognitionCompleteHandler(
+      () => setState(() => isListening = false),
+    );
 
-//   void statusListener(String status ) {
-//     setState(() {
-//       lastStatus = "$status";
-//     });
-//   }
-// }
+    _speechRecognition.activate().then(
+          (result) => setState(() => isAvailable = true),
+    );
+  }
+
+  saveAudioInput() {
+  _databaseReference.push().set({
+    "AudioInput" : resultText
+  });
+
+  setState(() {
+    resultText = "";
+  });
+}
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: Scaffold(
+        body: isAvailable
+          ?  Container(
+                color: Color(0xFFF5F5DC),
+                height: MediaQuery.of(context).size.height,
+                width: MediaQuery.of(context).size.width,
+                child: Card(
+                  elevation: 15.0,
+                  color: Color(0xFFF5F5DC),
+                  child: Column(
+                    children: <Widget>[
+                      SizedBox(
+                        height: MediaQuery.of(context).size.height / 4,
+                      ),
+                      Row(
+                        children: <Widget>[
+                          SizedBox(
+                            width: MediaQuery.of(context).size.width / 5,
+                          ),
+                          SizedBox(
+                            width: 60.0,
+                            height: 60.0,
+                            child: FloatingActionButton(
+                              child: Icon(
+                                Icons.cancel,
+                                size: 32.0,
+                              ),
+                              mini: true,
+                              backgroundColor: Colors.deepOrange,
+                              onPressed: (){
+                                if (isListening) {
+                                  print('Cancel Pressed');
+                                  _speechRecognition.cancel().then(
+                                    (result) => setState(() {
+                                      isListening = result;
+                                      resultText = "";
+                                    })
+                                  );
+                                }
+                              },
+                            ),
+                          ),
+                          SizedBox(
+                            width: 10.0,
+                          ),
+                          SizedBox(
+                            width: 100.0,
+                            height: 100.0,
+                            child: FloatingActionButton(
+                              child: Icon(
+                                Icons.mic,
+                                size: 35.0,
+                              ),
+                              onPressed: (){
+                                if (isAvailable && !isListening){
+                                  print('Play Pressed');
+                                  _speechRecognition
+                                    .listen(locale: "en_US")
+                                    .then((result) => print(result));
+                                }
+                              },
+                              backgroundColor: Colors.pink,
+                            ),
+                          ),
+                          SizedBox(
+                            width: 10.0,
+                          ),
+                          SizedBox(
+                            width: 60.0,
+                            height: 60.0,
+                            child: FloatingActionButton(
+                              child: Icon(
+                                Icons.stop,
+                                size: 32.0,
+                              ),
+                              mini: true,
+                              backgroundColor: Colors.deepPurple,
+                              onPressed: (){
+                                if(isListening){
+                                  print('Stop Pressed');
+                                  _speechRecognition
+                                    .stop()
+                                    .then((result) => setState(() => isListening = result ));
+                                }
+                              },
+                            ),
+                          ),
+                        ],
+                      ),
+                      SizedBox(
+                        height: 30.0,
+                      ),
+                      Expanded(
+                        child: SingleChildScrollView(
+                          child: Container(
+                            width: MediaQuery.of(context).size.width / 1.5,
+                            color: Color(0xFFf7eaa3),
+                            child: Column(
+                              children: <Widget>[
+                                SizedBox(
+                                  height: 30.0,
+                                ),
+                                Center(
+                                  child: Text('Your Message', style: TextStyle(
+                                    fontSize: 17.0, 
+                                    fontWeight: FontWeight.bold
+                                    ),
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: 30.0,
+                                ),
+                                Center(
+                                  child: Padding(
+                                    padding: EdgeInsets.all(20.0),
+                                    child: Text(resultText), 
+                                  )
+                                ),
+                                SizedBox(
+                                  height: 20.0,
+                                ),
+                              ],
+                            ),
+                          ),
+                        )
+                      ),
+                      SizedBox(
+                        height: 20.0,
+                      ),
+                      RaisedButton(
+                        color: Colors.deepPurple,
+                        child: Text('Send', style: TextStyle(
+                          fontSize: 16.0,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white
+                        )),
+                        onPressed: saveAudioInput,
+                      ),
+                      SizedBox(
+                        height: 20.0,
+                      ),
+                      Expanded(
+                        child: Center(
+                          child: isListening ? 
+                          Text("I'm listening...", style: TextStyle(
+                              color: Colors.black,
+                              fontSize: 15.0
+                            ),
+                          )
+                          :
+                          Text( 'Not listening', style: TextStyle(
+                              color: Colors.black,
+                              fontSize: 15.0
+                            ),
+                          ),  
+                        )
+                      ),
+                    ],
+                  ),
+                ),
+              )
+            : Center( child: Text('Speech recognition unavailable', style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold))),
+      ),
+    );
+  }
+
+}

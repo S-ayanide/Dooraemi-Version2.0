@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import '../Models/VoicemailDialog.dart';
 import '../Models/TextDialog.dart';
-//import '../Models/SpeechDialog.dart';
+import '../Models/SpeechDialog.dart';
 
 class Profile extends StatefulWidget {
   
@@ -69,9 +69,9 @@ class _ProfileState extends State<Profile> {
                       RaisedButton(
                         child: Icon(Icons.mic, size: 60.0,),
                         onPressed: (){
-                          // Navigator.push(context, MaterialPageRoute(
-                          //   builder: (context) => SpeechDialog()
-                          // ));
+                          Navigator.push(context, MaterialPageRoute(
+                            builder: (context) => SpeechDialog()
+                          ));
                         },
                         color: Color(0xFFbfb0f7),
                         padding: const EdgeInsets.fromLTRB(70.0,15.0,75.0,20.0),

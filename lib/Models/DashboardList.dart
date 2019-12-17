@@ -7,7 +7,7 @@ import './DateTimeFetcher.dart';
 import '../screen/Profile.dart';
 import '../Models/VoicemailDialog.dart';
 import '../Models/TextDialog.dart';
-//import '../Models/SpeechDialog.dart';
+import '../Models/SpeechDialog.dart';
 
 class DashboardList extends StatefulWidget {
   @override
@@ -134,9 +134,9 @@ class _DashboardListState extends State<DashboardList> {
                               RaisedButton(
                                 child: Icon(Icons.mic),
                                 onPressed: (){
-                                  // Navigator.push(context, MaterialPageRoute(
-                                  //   builder: (context) => SpeechDialog()
-                                  // ));
+                                  Navigator.push(context, MaterialPageRoute(
+                                    builder: (context) => SpeechDialog()
+                                  ));
                                 },
                                 color: Color(0xFFbfb0f7),
                                 padding: const EdgeInsets.fromLTRB(20.0,5.0,20.0,5.0),
