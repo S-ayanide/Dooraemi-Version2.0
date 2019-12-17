@@ -6,13 +6,25 @@ final String voicemailTwo = 'Please, leave the parcel with the neighbour.';
 final String voicemailThree = "Please wait a minute, we'll be right there";
 
 String _uid = '1';
-String input;
+String input = '';
 
-DatabaseReference _databaseReference = FirebaseDatabase.instance.reference().child(_uid);
+DatabaseReference _databaseReference = FirebaseDatabase.instance.reference().child('Users');
 
-saveVoiceMail() {
-  _databaseReference.push().set({
-    "VoiceMail" : input
+saveVoiceMail() async {
+  await _databaseReference.child(_uid).set({
+    'VoiceInput': input
+  });
+}
+
+getVoice() {
+  _databaseReference.once().then((DataSnapshot snapshot){
+    print('Data: ${snapshot.value}');
+  });
+}
+
+updateVoice() {
+  _databaseReference.child(_uid).update({
+    'VoiceInput': 'This is update'
   });
 }
 

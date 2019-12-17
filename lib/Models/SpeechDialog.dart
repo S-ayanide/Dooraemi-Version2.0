@@ -13,7 +13,7 @@ class _SpeechDialogState extends State<SpeechDialog> {
   SpeechRecognition _speechRecognition;
   static String _uid = '1';
 
-  DatabaseReference _databaseReference = FirebaseDatabase.instance.reference().child(_uid);
+  DatabaseReference _databaseReference = FirebaseDatabase.instance.reference().child('Users');
 
   String resultText = "";
 
@@ -51,15 +51,16 @@ class _SpeechDialogState extends State<SpeechDialog> {
     );
   }
 
-  saveAudioInput() {
-  _databaseReference.push().set({
-    "AudioInput" : resultText
-  });
+  saveAudioInput() async {
+    
+    await _databaseReference.child(_uid).set({
+      'AudioInput': resultText
+    });
 
-  setState(() {
-    resultText = "";
-  });
-}
+    setState(() {
+      resultText = "";
+    });
+  }
 
   @override
   Widget build(BuildContext context) {

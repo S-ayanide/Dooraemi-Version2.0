@@ -4,11 +4,11 @@ import 'package:firebase_database/firebase_database.dart';
 String result = '';
 String _uid = '1';
 
-DatabaseReference _databaseReference = FirebaseDatabase.instance.reference().child(_uid);
+DatabaseReference _databaseReference = FirebaseDatabase.instance.reference().child('Users');
 
-saveText () async {
-  await _databaseReference.push().set({
-    "TextInput": result
+saveText() async {
+  await _databaseReference.child(_uid).set({
+    'TextInput': result
   });
 }
 
