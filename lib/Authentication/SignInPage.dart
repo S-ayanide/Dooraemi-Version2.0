@@ -87,6 +87,7 @@ class _SigninPageState extends State<SigninPage> {
                       Container(                        
                         padding: EdgeInsets.only(top: 20.0),
                         child: TextFormField(
+                          style: TextStyle(color: Colors.white),
                           cursorColor: Colors.white,
                           validator: (input) {
                             if (input.isEmpty) {
@@ -108,6 +109,7 @@ class _SigninPageState extends State<SigninPage> {
                       Container(
                         padding: EdgeInsets.only(top: 20.0),
                         child: TextFormField(
+                          style: TextStyle(color: Colors.white),
                           cursorColor: Colors.white,
                           validator: (input) {
                             if (input.length < 6) {
