@@ -95,11 +95,11 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
         child: ListView(
           children: <Widget>[
             UserAccountsDrawerHeader(
-              accountName: Text('La Tien', style: TextStyle(color: Colors.black),),
-              accountEmail: Text('stupidnarcos@vietnam.in', style: TextStyle(color: Colors.black)),
+              accountName: Text('${user.displayName}', style: TextStyle(color: Colors.black),),
+              accountEmail: Text('${user.email}', style: TextStyle(color: Colors.black)),
               decoration: BoxDecoration(
                 image: DecorationImage(
-                  image: NetworkImage('https://previews.123rf.com/images/liveincosmos/liveincosmos1803/liveincosmos180300038/98521288-abstract-pastel-watercolor-background-.jpg'),
+                  image: NetworkImage('https://images.pexels.com/photos/911738/pexels-photo-911738.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940'),
                   fit: BoxFit.cover
                 )
               ),
