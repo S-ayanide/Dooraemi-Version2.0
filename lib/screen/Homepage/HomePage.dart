@@ -127,10 +127,16 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
                 activeColor: Colors.green,
               ),
             ),
+            Divider(
+              thickness: 0.5,              
+            ),
             ListTile(
-              title: Text('Sign Out'),
+              title: Text('Log Out'),
               trailing: Icon(Icons.power_settings_new),
               onTap: signOut
+            ),
+            Divider(
+              thickness: 0.5,
             ),
           ],
         ),
