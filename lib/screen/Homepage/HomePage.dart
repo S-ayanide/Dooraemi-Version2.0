@@ -20,6 +20,7 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
   FirebaseUser user;
+  String username, email;
   bool isSignedIn = false;
   int selectedPage=0;  
   var dndToggleValue;
@@ -29,7 +30,7 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
   void initState(){
     super.initState();
     this.checkAuthentication();
-    this.getUser();
+    this.getUser();    
     dndToggleValue = false;
     controller = new TabController(vsync: this, length: 3);
   }
@@ -72,7 +73,7 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
     setState(() {
       dndToggleValue = e;
     });
-  }
+  }  
 
   @override
   Widget build(BuildContext context) {
