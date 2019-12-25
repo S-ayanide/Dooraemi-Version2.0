@@ -1,5 +1,5 @@
 import 'dart:io';
-
+import 'dart:async';
 import '../../screen/History.dart';
 import 'package:flutter/material.dart';
 import './HomePageTopPart.dart';
@@ -21,8 +21,8 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
   final ScrollController _mycontroller = new ScrollController();
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
-  FirebaseUser user;    
-  String username, email;
+  FirebaseUser user;
+  String username = 'Name', email = 'Email';    
   bool isSignedIn = false;
   int selectedPage=0;  
   var dndToggleValue;
@@ -62,13 +62,8 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
       setState(() {
         this.user = firebaseUser;
         this.isSignedIn = true;
-        username = user.displayName;
-        email = user.email;
-      });
-    } else {
-      setState(() {
-        username = " ";
-        email = " ";
+        this.username = user.displayName;
+        this.email = user.email;
       });
     }
     //print(this.user);
