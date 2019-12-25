@@ -3,7 +3,7 @@ import 'package:vector_math/vector_math_64.dart' as math;
 
 class RadialProgress extends StatefulWidget {
 
-  final double numberOfRecent = 0.7;
+  final double numberOfRecent = 0.5;
 
   @override
   _RadialProgressState createState() => _RadialProgressState();

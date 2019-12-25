@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import '../../screen/History.dart';
 import 'package:flutter/material.dart';
 import './HomePageTopPart.dart';
@@ -19,7 +21,7 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
   final ScrollController _mycontroller = new ScrollController();
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
-  FirebaseUser user;
+  FirebaseUser user;    
   String username, email;
   bool isSignedIn = false;
   int selectedPage=0;  
@@ -30,7 +32,7 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
   void initState(){
     super.initState();
     this.checkAuthentication();
-    this.getUser();    
+    this.getUser();  
     dndToggleValue = false;
     controller = new TabController(vsync: this, length: 3);
   }
@@ -60,6 +62,13 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
       setState(() {
         this.user = firebaseUser;
         this.isSignedIn = true;
+        username = user.displayName;
+        email = user.email;
+      });
+    } else {
+      setState(() {
+        username = " ";
+        email = " ";
       });
     }
     //print(this.user);
@@ -96,8 +105,8 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
         child: ListView(
           children: <Widget>[
             UserAccountsDrawerHeader(
-              accountName: Text('${user.displayName}', style: TextStyle(color: Colors.black),),
-              accountEmail: Text('${user.email}', style: TextStyle(color: Colors.black)),
+              accountName: Text(username, style: TextStyle(color: Colors.black),),
+              accountEmail: Text(email, style: TextStyle(color: Colors.black)),
               decoration: BoxDecoration(
                 image: DecorationImage(
                   image: NetworkImage('https://images.pexels.com/photos/911738/pexels-photo-911738.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940'),
