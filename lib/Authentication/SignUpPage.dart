@@ -10,8 +10,7 @@ class _SignUpPageState extends State<SignUpPage> {
 
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  String _email, _name, _password;
-  static String _uid, _phone;
+  String _email, _name, _password;  
 
   checkAuthentication() async {
     _auth.onAuthStateChanged.listen((user){
@@ -85,8 +84,8 @@ class _SignUpPageState extends State<SignUpPage> {
                       //Dooraemi Image
                       Container(
                         child: Image(
-                          width: MediaQuery.of(context).size.width / 3,
-                          height: MediaQuery.of(context).size.height/6,
+                          width: MediaQuery.of(context).size.width / 2,
+                          height: MediaQuery.of(context).size.height/3,
                           image: AssetImage('assets/SignUp/DooraemiSignUp.png'),
                         ),
                       ),
@@ -137,36 +136,6 @@ class _SignUpPageState extends State<SignUpPage> {
                                   borderRadius: BorderRadius.circular(15.0))),
                           onSaved: (input) => _password = input,
                           obscureText: true,
-                        ),
-                      ),
-                      Container(
-                        padding: EdgeInsets.only(top: 20.0),
-                        child: TextFormField(
-                          validator: (input) {
-                            if (input.isEmpty) {
-                              return 'Provide Your Device UID';
-                            }
-                          },
-                          decoration: InputDecoration(
-                              labelText: 'Device UID',
-                              border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(15.0))),
-                          onSaved: (input) => _uid = input,
-                        ),
-                      ),
-                      Container(
-                        padding: EdgeInsets.only(top: 20.0),
-                        child: TextFormField(
-                          validator: (input) {
-                            if (input.isEmpty) {
-                              return 'Provide your phone number';
-                            }
-                          },
-                          decoration: InputDecoration(
-                              labelText: 'Your Phone Number',
-                              border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(15.0))),
-                          onSaved: (input) => _phone = input,
                         ),
                       ),
                       Container(
