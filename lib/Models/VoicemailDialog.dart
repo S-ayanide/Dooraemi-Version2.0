@@ -51,6 +51,7 @@ createVoicemailDialog(BuildContext context){
                   onPressed: (){
                     input = voicemailOne;
                     saveVoiceMail();
+                    Navigator.of(context).pop();
                   },
                   child: Text(voicemailOne, style: TextStyle(
                     color: Colors.white, 
@@ -70,6 +71,7 @@ createVoicemailDialog(BuildContext context){
                   onPressed: (){
                     input = voicemailTwo;
                     saveVoiceMail();
+                    Navigator.of(context).pop();
                   },
                   child: Text(voicemailTwo, style: TextStyle(
                     color: Colors.white,
@@ -89,6 +91,7 @@ createVoicemailDialog(BuildContext context){
                   onPressed: (){
                     input = voicemailThree;
                     saveVoiceMail();
+                    Navigator.of(context).pop();
                   },
                   child: Text(voicemailThree, style: TextStyle(
                     color: Colors.white,

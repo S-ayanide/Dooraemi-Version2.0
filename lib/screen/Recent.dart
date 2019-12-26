@@ -1,10 +1,16 @@
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import '../screen/Profile.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import '../Models/DateTimeFetcher.dart';
+import 'package:firebase_database/firebase_database.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import '../Models/SpeechDialog.dart';
+import '../Models/DataList.dart';
 
 class Recent extends StatefulWidget {
   @override
@@ -14,9 +20,9 @@ class Recent extends StatefulWidget {
 class _RecentState extends State<Recent> {
 
   static int recentNumbers = 4;
-  final String url = "https://randomuser.me/api/?results=$recentNumbers";
-  List data;
+  final String url = "https://randomuser.me/api/?results=$recentNumbers";  
   bool isLoading=false;
+  List data;
 
   Future getData() async {
     var request = await http.get(
@@ -28,11 +34,50 @@ class _RecentState extends State<Recent> {
       data = convertDataToJson;
     });
   }
+  // List<DataList> dataList = [];
+  // FirebaseUser user;  
+  // DatabaseReference _databaseReference = FirebaseDatabase.instance.reference().child('Users').child('1');
+  // StorageReference _storageReference = FirebaseStorage.instance.ref().child('/');
+  // final FirebaseAuth _auth = FirebaseAuth.instance;  
+
+//   getUser() async {
+//     FirebaseUser firebaseUser = await _auth.currentUser();
+//     //ISSUE:  https://github.com/flutter/flutter/issues/19746
+//     await firebaseUser?.reload();    
+//     firebaseUser = await _auth.currentUser();
+
+//     if (firebaseUser != null) {
+//       setState(() {
+//         this.user = firebaseUser;      
+//       });
+//     }    
+//   }
+
+//   void getData()async{   
+
+//   _databaseReference.once().then((DataSnapshot snapshot) {
+//     var KEYS = snapshot.value.keys;
+//     var DATA = snapshot.value;            
+
+//     dataList.clear();
+
+//     for(var individualKey in KEYS){                
+//       DataList data = DataList(
+//         DATA[individualKey]['ImageURL'],
+//         DATA[individualKey]['TimeStamp']
+//       );
+
+//       dataList.add(data);      
+//       print(DATA[individualKey]['ImageURL']);
+//     }     
+//   });  
+// }
 
   @override
   void initState(){
     super.initState();
-    this.getData();
+    //this.getUser();
+    this.getData();    
   }
 
   computeDate(){
