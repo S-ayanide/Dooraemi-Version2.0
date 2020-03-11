@@ -150,7 +150,7 @@ class _RecentState extends State<Recent> {
                                         ),
                                       ),
                                       SizedBox(
-                                        width: MediaQuery.of(context).size.width / 10,
+                                        width: MediaQuery.of(context).size.width / 5,
                                       ),
                                       Text(
                                         computeTime(),

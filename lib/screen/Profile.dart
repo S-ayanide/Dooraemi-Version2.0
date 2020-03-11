@@ -82,7 +82,7 @@ class _ProfileState extends State<Profile> {
                           createTextDialog(context);
                         },
                         color: Color(0xFF8acaf6),
-                        padding: const EdgeInsets.fromLTRB(75.0,15.0,70.0,20.0),
+                        padding: const EdgeInsets.fromLTRB(80.0,15.0,77.0,20.0),
                       )
                     ],
                   ),

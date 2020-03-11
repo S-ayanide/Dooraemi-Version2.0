@@ -107,7 +107,7 @@ class _DashboardListState extends State<DashboardList> {
                                   ),
                                 ),
                                 SizedBox(
-                                  width: MediaQuery.of(context).size.width / 10,
+                                  width: MediaQuery.of(context).size.width / 5,
                                 ),
                                 Text(
                                   computeTime(),

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'dart:async';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-import '../screen/Profile.dart';
 import '../Models/DateTimeFetcher.dart';
 
 class History extends StatefulWidget {
@@ -69,14 +68,7 @@ class _HistoryState extends State<History> {
                     elevation: 3.0,
                     child: InkWell(
                       highlightColor: Color(0xFFa5cc82),
-                      onTap: (){
-                        Navigator.push(context, MaterialPageRoute(
-                          builder: (context) => Profile(
-                            value: computeTime() + computeSeconds(), 
-                            pic: data[i]['picture']['thumbnail']
-                          )
-                        ));
-                      },
+                      onTap: (){},
                       child: Row(
                         children: <Widget>[
                           Container(
