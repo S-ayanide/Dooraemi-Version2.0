@@ -1,7 +1,7 @@
 import boto3
 
-dynamodb = boto3.resource('dynamodb', region_name='us-east-1')
-table = dynamodb.Table('Dooraemi')
+dynamodb = boto3.resource('dynamodb', region_name='YOUR_REGION_NAME')
+table = dynamodb.Table('YOUR_TABLE_NAME')
 
 table.put_item(
     Item = {
