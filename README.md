@@ -21,7 +21,7 @@ This application allows the owner of a house to always stay alert. Every time so
      alt="Recent Screen"
      style="float: left; margin-right: 10px;"
      width="200"/> 
-     <img src="https://media.giphy.com/media/dYmd8IhICdfrEIgxBr/giphy.gif" width="40" height="40" />
+     <img src="https://media.giphy.com/media/dYmd8IhICdfrEIgxBr/giphy.gif" width="200" />
      
      
 ## NOTE:
