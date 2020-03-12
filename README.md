@@ -11,9 +11,7 @@ A smart Doorbell to receive alert and know who is outside, no matter where you a
 This application allows the owner of a house to always stay alert. Every time someone rings your doorbell, you can get an SMS or email with a notification. A physically challenged or a deaf person can get a vibrate notification on their phone when someone is at the door. With the help of a camera, it allows us to take pictures of the person at the door, and SMS or email you the same. With the added voice capability we can actually talk to the visitor at the door while sitting thousands of miles away.
 
 ## Screenshots
- <img src="https://media.giphy.com/media/dYmd8IhICdfrEIgxBr/giphy.gif" width="200" />
- <img src="https://media.giphy.com/media/egv5Exo5YA4hAr9GHK/giphy.gif" width="200" />
- <img src="images/SS3.png"
+ <img src="https://media.giphy.com/media/dYmd8IhICdfrEIgxBr/giphy.gif" width="200" /> <img src="https://media.giphy.com/media/egv5Exo5YA4hAr9GHK/giphy.gif" width="200" /> <img src="images/SS3.png"
      alt="Recent Screen"
      style="float: left; margin-right: 10px;"
      width="200"/> 
