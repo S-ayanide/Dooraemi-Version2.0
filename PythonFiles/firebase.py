@@ -1,6 +1,6 @@
 from firebase import firebase
  
-firebase = firebase.FirebaseApplication('https://dooraemi-35dd1.firebaseio.com/', None)
+firebase = firebase.FirebaseApplication('https://YOUR_FIREBASE_DATABSE_URL', None)
 data =  { 'Image': 'NULL',
           'TimeStamp': 'Some Timestamp'
         }
