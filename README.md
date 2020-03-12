@@ -20,7 +20,9 @@ This application allows the owner of a house to always stay alert. Every time so
      width="200"/> <img src="images/SS3.png"
      alt="Recent Screen"
      style="float: left; margin-right: 10px;"
-     width="200"/> ![Login](https://media.giphy.com/media/dYmd8IhICdfrEIgxBr/giphy.gif)
+     width="200"/> 
+     <img src="https://media.giphy.com/media/dYmd8IhICdfrEIgxBr/giphy.gif" width="40" height="40" />
+     
      
 ## NOTE:
 This project is subject to change by the developer and is still in development
